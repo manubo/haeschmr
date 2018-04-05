@@ -2,16 +2,25 @@
   "name": "haeschmr",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-scripts": "1.1.4",
-    "sha256": "^0.2.0"
-  },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "nodemon server/index.js",
+    "dev": "concurrently --kill-others-on-fail \"react-scripts start\" \"yarn start\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "postinstall": "yarn build",
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-static": "^4.0.2",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-scripts": "1.1.4",
+    "sha256": "^0.2.0",
+    "socket.io": "^2.1.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
   }
 }
