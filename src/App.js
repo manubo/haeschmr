@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Block from './blockchain/Block';
 
 class App extends Component {
   render() {

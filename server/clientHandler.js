@@ -1,5 +1,9 @@
-module.exports = (io) => {
+module.exports = (io, blockchain) => {
   io.on('connection', client => {
-    client.on('msg', payload => console.log(payload));
+    client.emit('blockchain', blockchain.toJSON());
+    client.on('msg', block => {
+      //if (blockchain.add(block)) {
+      //}
+    });
   });
 };
