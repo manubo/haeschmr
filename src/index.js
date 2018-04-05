@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import User from './models/User';
 import registerServiceWorker from './registerServiceWorker';
-import Blockchain from './models/Blockchain';
 import io from 'socket.io-client';
+import wsConnector from './wsConnector';
 
 const socket = io(':1337');
 
@@ -15,11 +15,9 @@ function initialize() {
   };
 }
 
-socket.on('blockchain', blockchain =>
-  console.log(Blockchain.fromJSON(blockchain))
-);
-
 const state = initialize();
+const ConnectedApp = wsConnector(state)(socket)(App);
 
-ReactDOM.render(<App state={state} />, document.getElementById('root'));
+
+ReactDOM.render(<ConnectedApp />, document.getElementById('root'));
 registerServiceWorker();

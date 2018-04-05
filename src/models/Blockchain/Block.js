@@ -7,7 +7,7 @@ module.exports = class Block {
   }
 
   constructor({ data, prev, difficulty = '0000', time, nounce }) {
-    this.data = JSON.stringify(data);
+    this.data = data;
     this.prev = prev;
     this.difficulty = difficulty;
     this.time = time || new Date().getTime();
@@ -21,7 +21,9 @@ module.exports = class Block {
     do {
       nounce += 1;
       hash = sha256(
-        `${nounce}${this.time}${this.difficulty}${this.prev}${this.data}`
+        `${nounce}${this.time}${this.difficulty}${this.prev}${JSON.stringify(
+          this.data
+        )}`
       );
     } while (hash.indexOf(this.difficulty) !== 0);
 
@@ -38,9 +40,15 @@ module.exports = class Block {
     };
   }
 
+  toJSON() {
+    return JSON.stringify(this.attributes());
+  }
+
   get hash() {
     return sha256(
-      `${this.nounce}${this.time}${this.difficulty}${this.prev}${this.data}`
+      `${this.nounce}${this.time}${this.difficulty}${this.prev}${JSON.stringify(
+        this.data
+      )}`
     );
   }
 };

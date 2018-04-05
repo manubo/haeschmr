@@ -26,30 +26,38 @@ module.exports = class Blockchain {
     return true;
   }
 
+  lastBlock() {
+    return last(this.chain);
+  }
+
   verify(block) {
     if (block.hash.indexOf(block.difficulty) !== 0) {
       return false;
     }
+
     if (
       block.hash !==
       sha256(
-        `${block.nounce}${block.time}${block.difficulty}${block.prev}${
-          block.data
-        }`
+        `${block.nounce}${block.time}${block.difficulty}${
+          block.prev
+        }${JSON.stringify(block.data)}`
       )
     ) {
       return false;
     }
+
     if (block.prev !== last(this.chain).hash) {
       return false;
     }
 
     if (
-      block.time <= new Date().getTime() &&
-      block.time >= last(this.chain).time
+      block.time > new Date().getTime() ||
+      block.time < last(this.chain).time
     ) {
       return false;
     }
+
+    return true;
   }
 
   toJSON() {
