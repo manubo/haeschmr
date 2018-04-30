@@ -22,6 +22,7 @@ export default class Transaction extends Component {
         <h1>Uslehne</h1>
         <div className="form-group">
           <label>Credit Account</label>
+          <br />
           <input
             name="accountCredit"
             value={accountCredit}
@@ -30,9 +31,10 @@ export default class Transaction extends Component {
         </div>
         <div className="form-group">
           <label>Amount</label>
+          <br />
           <input name="amount" value={amount} onChange={this.handleChange} />
         </div>
-        <input type="submit" value="Jo isch guet." />
+        <input type="submit" value="Jetzt uslehne" className="btn" />
       </form>
     );
   }

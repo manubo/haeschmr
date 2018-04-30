@@ -15,7 +15,6 @@ export default initialState => socket => WrappedComponent => {
         this.setState({ blockchain: Blockchain.fromJSON(blockchain) })
       );
       this.socket.on('newBlock', jsonBlock => {
-        console.log('newBlock', jsonBlock)
         const { blockchain } = this.state;
         const block = Block.fromJSON(jsonBlock);
         blockchain.add(block);
@@ -28,7 +27,6 @@ export default initialState => socket => WrappedComponent => {
     }
 
     render() {
-      console.log(this.state);
       return <WrappedComponent state={this.state} onEmit={this.emit} />;
     }
 

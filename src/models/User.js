@@ -28,4 +28,3 @@ export default class User {
     return JSON.stringify({ accountNumber: this.accountNumber });
   }
 }
-

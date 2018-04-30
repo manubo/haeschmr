@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Block from './models/Blockchain/Block';
 import Transaction from './Transaction';
 import Transactions from './Transactions';
 
-import './App.css';
-
 class App extends Component {
+  static propTypes = {
+    state: PropTypes.shape({
+      user: PropTypes.object,
+      blockchain: PropTypes.object
+    }),
+    onEmit: PropTypes.func
+  };
+
   render() {
-    const { state: { user, blockchain } } = this.props;
+    const {
+      state: { user, blockchain }
+    } = this.props;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -31,7 +41,9 @@ class App extends Component {
   }
 
   submitTransaction = ({ accountCredit, amount }) => {
-    const { state: { user, blockchain } } = this.props;
+    const {
+      state: { user, blockchain }
+    } = this.props;
 
     const block = new Block({
       data: { accountDebit: user.accountNumber, accountCredit, amount },
